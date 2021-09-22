@@ -1,0 +1,113 @@
+#include <iostream>
+
+
+using namespace std;
+
+struct Node {
+	int data;
+	Node* point;
+};
+	
+class LinkedList {
+	//head pointer
+	Node* head;
+		
+	public:
+		LinkedList();
+		void append(int dx);
+		void print();
+		Node* getHead();
+		
+};
+
+//constructor for linked list
+		LinkedList::LinkedList(){
+			head = NULL;
+		}
+		
+		//add data to linked list and set its point to NULL
+		void LinkedList::append(int dx){
+			Node* n = new Node;
+			n -> data = dx;
+			n -> point = NULL;
+			
+			if (head == NULL){
+				head = n;
+			}else{
+				n -> point = head;
+				head = n;
+			}
+		}
+		
+		void LinkedList::print(){
+		    Node* temp = head;
+			while (temp != NULL){
+				cout << temp -> data << " ";
+				temp = temp -> point;
+			}	
+			printf("\n");
+		}
+		
+		Node* LinkedList::getHead(){
+			return(head);
+		}
+
+bool numOdd(LinkedList a, LinkedList b){
+	Node* pa = a.getHead();
+	Node* pb = b.getHead();
+	
+	int numOddA = 0;
+	int numOddB = 0;
+	
+	while (pa != NULL){
+		if (pa -> data % 2 != 0){
+			numOddA = numOddA + 1;
+		}
+        pa = pa -> point;
+	}
+	
+	while (pb != NULL){
+		if (pb -> data % 2 != 0){
+			numOddB++;
+		}
+        pb = pb -> point;
+	}
+	
+	if (numOddA == numOddB){
+		return false;
+	}
+    
+    cout << "Odd in a: " << numOddA << " ";
+    cout << "Odd in b: " << numOddB;
+    printf("\n");
+	
+	return true;
+};
+
+int main() {
+  
+	LinkedList l;
+	// inserting elements
+  	l.append(6);
+  	l.append(9);
+  	l.append(1);
+  	l.append(3);
+  	l.append(7);
+  	cout << "Current Linked List: ";
+  	l.print();
+  	
+  	LinkedList l2;
+	// inserting elements
+  	l2.append(1);
+  	l2.append(3);
+  	l2.append(2);
+  	l2.append(6);
+  	l2.append(8);
+  	cout << "Current Linked List: ";
+  	l2.print();
+
+    bool r = numOdd(l, l2);
+    cout << r;
+};
+
+
